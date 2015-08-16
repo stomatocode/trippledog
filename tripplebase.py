@@ -1,28 +1,27 @@
 from flask import Flask
 from twilio.rest import TwilioRestClient
+from twilio import twiml
 
-conn = TwilioRestClient()
+# Your Account Sid and Auth Token from twilio.com/user/account
+ACCOUNT = "AC65041c9af6c305c4dadbb58f1279daf2"
+TOKEN  = "31da0ac861bc350fc86c9accd8f5547e"
+client = TwilioRestClient(ACCOUNT, TOKEN)
+
+# conn = TwilioRestClient()
+
 app = Flask(__name__)
 
 
 @app.route('/')
-<<<<<<< HEAD
-# load most popular dares
-# -> twitter feed panel + internal tracking of votes
 
-def greeting():
-    return 'Hello World!'
-    return 'IamN00B!woot'
-=======
 # def greeting():
 #     return 'Hello World!'
->>>>>>> df2d1d3fd072f6a1d5e94c8668285207016a8a0c
 
 # load most popular dares
-# -> twitter feed panel + internal tracking of votes
+# -> twitter feed panel + internal tracking of votes/dares
 
-# ########################################
-# STAVROS, this is your section here:
+# STAVROS ########################################
+# this is your section here:
 # database stuff, happening in here in root route
 
 def load_tweets(arg):
@@ -37,8 +36,8 @@ def load_dares(arg):
 
 # @app.route('/sms', methods=['POST'])
 
-<<<<<<< HEAD
 #     def add_entry():
+# some sample code for interacting with the database:
 
 
 
@@ -49,7 +48,6 @@ def load_dares(arg):
         # g.db.commit()
         # flash('New entry was successfully posted')
         # return
-=======
     # def add_entry():
     #
     #
@@ -61,27 +59,46 @@ def load_dares(arg):
     #     # g.db.commit()
     #     # flash('New entry was successfully posted')
     #     return
+# STAVROS ########################################
 
 
 
->>>>>>> df2d1d3fd072f6a1d5e94c8668285207016a8a0c
+# TWILIO stuff ###########################
+# inbound sms and callback methods
+#
+@app.route('/sms')
+# request TwiML
+
 
 # @app.route('/sms_callback', methods=['POST'])
+# respond to inbound message
+# action="http://tripledog.me/sms_callback"
+def respond():
+    response = twiml.Response()
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984")
+    print "responded"
+    return message
 
-    # SMS callback method, possibly a response
+
+# SMS callback method; retrieve message SID and parameters
+@app.route('/sms_callback')
+
+def get_message():
 
 
-# @app.route('/sms_callback', methods=['POST'])
+    return None
 
 
 
 
+# TWILIO stuff ###########################
 
 
 
 # STRETCH GOALS:
 
 # USERS ========
+# twitter oath for user accounts, dare tracking
 
 # @app.route('/home')
 # # authenticated users main area
@@ -109,6 +126,8 @@ if __name__ == '__main__':
 
 # (checkmark in osx: option + v)
 # TODO:
+
+# todo:
 # install twitter wrapper:
 #
 
