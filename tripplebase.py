@@ -7,7 +7,7 @@ from twilio import twiml
 # Your Account Sid and Auth Token from twilio.com/user/account
 ACCOUNT = "AC65041c9af6c305c4dadbb58f1279daf2"
 TOKEN  = "31da0ac861bc350fc86c9accd8f5547e"
-global client = TwilioRestClient(ACCOUNT, TOKEN)
+client = TwilioRestClient(ACCOUNT, TOKEN)
 
 # conn = TwilioRestClient()
 
@@ -68,13 +68,13 @@ def respond():
 
 
 # SMS callback method; retrieve message SID and parameters
-@app.route('/sms_callback')
-
-def get_message(flask.request):
-    SID = request
-    message = client.messages.get()
-
-    return None
+# @app.route('/sms_callback')
+#
+# def get_message(flask.request):
+#     SID = request
+#     message = client.messages.get()
+#
+#     return None
 
 
 
@@ -105,10 +105,12 @@ def get_message(flask.request):
 
 
 
+#
+# if __name__ == "__main__":
+#     app.run(debug=True)
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
+if __name__ == '__main__':
+    app.run()
 
 # todo:
 # install twitter wrapper:
