@@ -16,8 +16,6 @@ app = Flask(__name__)
 
 @app.route('/')
 
-
-
 # def greeting():
 #     return 'Hello World!'
 
@@ -35,8 +33,23 @@ app = Flask(__name__)
 # def load_dares(arg):
 #     pass
 
+
+# ########################################
+
+# @app.route('/sms', methods=['POST'])
+
+#     def add_entry():
 # some sample code for interacting with the database:
 
+
+
+        # if not session.get('logged_in'):
+        #     abort(401)
+        # g.db.execute('insert into entries (title, text) values (?, ?)',
+        #              [request.form['title'], request.form['text']])
+        # g.db.commit()
+        # flash('New entry was successfully posted')
+        # return
     # def add_entry():
     #
     #
@@ -58,6 +71,8 @@ app = Flask(__name__)
 @app.route('/sms')
 # request TwiML
 
+
+# @app.route('/sms_callback', methods=['POST'])
 # respond to inbound message
 # action="http://tripledog.me/sms_callback"
 def respond():
@@ -111,6 +126,10 @@ def respond():
 
 if __name__ == '__main__':
     app.run()
+
+
+# (checkmark in osx: option + v)
+# TODO:
 
 # todo:
 # install twitter wrapper:
