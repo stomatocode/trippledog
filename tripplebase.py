@@ -127,12 +127,7 @@ def respond():
 if __name__ == '__main__':
     app.run()
 
-<<<<<<< HEAD
-=======
-# (checkmark in osx: option + v)
-# TODO:
 
->>>>>>> 4ad5395fdbb4e879878aaeed875e72fef2d48f32
 # todo:
 # install twitter wrapper:
 #
