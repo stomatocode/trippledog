@@ -5,13 +5,15 @@ app = Flask(__name__)
 @app.route('/')
 # load most popular dares
 # -> twitter feed panel + internal tracking of votes
-# def greeting():
-#     return 'Hello World!'
+
+def greeting():
+    return 'Hello World!'
+    return 'IamN00B!woot'
 
 
-@app.route('/sms', methods=['POST'])
+# @app.route('/sms', methods=['POST'])
 
-    def add_entry():
+#     def add_entry():
 
 
 
@@ -21,9 +23,9 @@ app = Flask(__name__)
         #              [request.form['title'], request.form['text']])
         # g.db.commit()
         # flash('New entry was successfully posted')
-        return
+        # return
 
-@app.route('/sms_callback', methods=['POST'])
+# @app.route('/sms_callback', methods=['POST'])
 
     # SMS callback method, possibly a response
 
@@ -62,7 +64,7 @@ if __name__ == '__main__':
 
 # (checkmark in osx: option + v)
 # TODO:
-# install twitter wrapper: √
+# install twitter wrapper:
 #
 
 
