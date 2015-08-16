@@ -1,5 +1,6 @@
 from flask import Flask
 from twilio.rest import TwilioRestClient
+from twilio import twiml
 
 conn = TwilioRestClient()
 app = Flask(__name__)
@@ -10,10 +11,10 @@ app = Flask(__name__)
 #     return 'Hello World!'
 
 # load most popular dares
-# -> twitter feed panel + internal tracking of votes
+# -> twitter feed panel + internal tracking of votes/dares
 
-# ########################################
-# STAVROS, this is your section here:
+# STAVROS ########################################
+# this is your section here:
 # database stuff, happening in here in root route
 
 def load_tweets(arg):
@@ -23,10 +24,7 @@ def load_tweets(arg):
 def load_dares(arg):
     pass
 
-
-# ########################################
-
-@app.route('/sms', methods=['POST'])
+# some sample code for interacting with the database:
 
     # def add_entry():
     #
@@ -39,20 +37,36 @@ def load_dares(arg):
     #     # g.db.commit()
     #     # flash('New entry was successfully posted')
     #     return
+# STAVROS ########################################
 
+
+
+# TWILIO stuff ###########################
+# inbound sms and callback methods
+#
+@app.route('/sms', methods=['GET'])
+# request TwiML
+
+# respond to inbound message
+def respond:
+
+    response = twiml.Response()
+# r.say("Hello")
+# print str(r)
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984")
+
+    print "responded"
 
 
 
 @app.route('/sms_callback', methods=['POST'])
 
-    # SMS callback method, possibly a response
-
-
-# @app.route('/sms_callback', methods=['POST'])
+    # SMS callback method; retrieve message SID and parameters
 
 
 
 
+# TWILIO stuff ###########################
 
 
 
