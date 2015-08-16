@@ -2,11 +2,20 @@ from flask import Flask
 from twilio.rest import TwilioRestClient
 from twilio import twiml
 
-conn = TwilioRestClient()
+# Your Account Sid and Auth Token from twilio.com/user/account
+ACCOUNT = "AC65041c9af6c305c4dadbb58f1279daf2"
+TOKEN  = "31da0ac861bc350fc86c9accd8f5547e"
+client = TwilioRestClient(ACCOUNT, TOKEN)
+
+# conn = TwilioRestClient()
+
 app = Flask(__name__)
 
 
 @app.route('/')
+
+
+
 # def greeting():
 #     return 'Hello World!'
 
@@ -44,18 +53,20 @@ def load_dares(arg):
 # TWILIO stuff ###########################
 # inbound sms and callback methods
 #
-@app.route('/sms', methods=['GET'])
+@app.route('/sms')
 # request TwiML
 
 # respond to inbound message
+# action="http://tripledog.me/sms_callback"
 def respond():
     response = twiml.Response()
-    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback")
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984")
     print "responded"
+    return message
 
 
 # SMS callback method; retrieve message SID and parameters
-@app.route('/sms_callback', methods=['POST'])
+@app.route('/sms_callback')
 
 def get_message():
 
@@ -99,7 +110,7 @@ if __name__ == '__main__':
     app.run()
 
 
-# TODO:
+# todo:
 # install twitter wrapper:
 #
 
