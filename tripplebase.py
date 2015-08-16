@@ -48,20 +48,19 @@ def load_dares(arg):
 # request TwiML
 
 # respond to inbound message
-def respond:
-
+def respond():
     response = twiml.Response()
-# r.say("Hello")
-# print str(r)
-    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984")
-
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback")
     print "responded"
 
 
-
+# SMS callback method; retrieve message SID and parameters
 @app.route('/sms_callback', methods=['POST'])
 
-    # SMS callback method; retrieve message SID and parameters
+def get_message():
+
+
+    return None
 
 
 
@@ -73,6 +72,7 @@ def respond:
 # STRETCH GOALS:
 
 # USERS ========
+# twitter oath for user accounts, dare tracking
 
 # @app.route('/home')
 # # authenticated users main area
@@ -98,9 +98,9 @@ def respond:
 if __name__ == '__main__':
     app.run()
 
-# (checkmark in osx: option + v)
+
 # TODO:
-# install twitter wrapper: √
+# install twitter wrapper:
 #
 
 
