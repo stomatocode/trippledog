@@ -1,11 +1,13 @@
 from flask import Flask
+from flask import request, url_for
+
 from twilio.rest import TwilioRestClient
 from twilio import twiml
 
 # Your Account Sid and Auth Token from twilio.com/user/account
 ACCOUNT = "AC65041c9af6c305c4dadbb58f1279daf2"
 TOKEN  = "31da0ac861bc350fc86c9accd8f5547e"
-client = TwilioRestClient(ACCOUNT, TOKEN)
+global client = TwilioRestClient(ACCOUNT, TOKEN)
 
 # conn = TwilioRestClient()
 
@@ -26,12 +28,12 @@ app = Flask(__name__)
 # this is your section here:
 # database stuff, happening in here in root route
 
-def load_tweets(arg):
-    pass
-
-
-def load_dares(arg):
-    pass
+# def load_tweets(arg):
+#     pass
+#
+#
+# def load_dares(arg):
+#     pass
 
 # some sample code for interacting with the database:
 
@@ -60,16 +62,17 @@ def load_dares(arg):
 # action="http://tripledog.me/sms_callback"
 def respond():
     response = twiml.Response()
-    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984")
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback.json")
     print "responded"
-    return message
+    return str(response)
 
 
 # SMS callback method; retrieve message SID and parameters
 @app.route('/sms_callback')
 
-def get_message():
-
+def get_message(flask.request):
+    SID = request
+    message = client.messages.get()
 
     return None
 
@@ -83,7 +86,7 @@ def get_message():
 # STRETCH GOALS:
 
 # USERS ========
-# twitter oath for user accounts, dare tracking
+# twitter oauth for user accounts, dare tracking
 
 # @app.route('/home')
 # # authenticated users main area
@@ -103,11 +106,8 @@ def get_message():
 
 
 
-
-
-
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 # todo:
