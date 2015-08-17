@@ -77,7 +77,7 @@ app = Flask(__name__)
 # action="http://tripledog.me/sms_callback"
 def respond():
     response = twiml.Response()
-    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback.json")
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback")
     print "responded"
     return str(response)
 
