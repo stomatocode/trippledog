@@ -1,8 +1,20 @@
 from flask import Flask
-from flask import request, url_for
+# import requests
+from flask import request
+# from flask import request, url_for
 
 from twilio.rest import TwilioRestClient
 from twilio import twiml
+
+# from werkzeug.wrappers import Request, Response
+
+import os
+# print
+# print os.environ.get('KEY_THAT_MIGHT_EXIST')
+
+
+# def application(environ, start_response):
+    # request = Request(environ)
 
 # Your Account Sid and Auth Token from twilio.com/user/account
 ACCOUNT = "AC65041c9af6c305c4dadbb58f1279daf2"
@@ -12,6 +24,8 @@ client = TwilioRestClient(ACCOUNT, TOKEN)
 # conn = TwilioRestClient()
 
 app = Flask(__name__)
+
+# global response = ""
 
 
 @app.route('/')
@@ -78,14 +92,21 @@ app = Flask(__name__)
 def respond():
     response = twiml.Response()
     message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback")
-    print "responded"
+    # print "responded"
     return str(response)
-
+    # return None
 
 # SMS callback method; retrieve message SID and parameters
-# @app.route('/sms_callback')
-#
-# def get_message(flask.request):
+@app.route('/sms_callback')
+
+def test():
+    print "################################## NINJA ##################################"
+
+    return str(request.args)
+
+
+# def get_message(twilio_response):
+#     # print response
 #     SID = request
 #     message = client.messages.get()
 #
@@ -95,6 +116,8 @@ def respond():
 
 
 # TWILIO stuff ###########################
+
+
 
 
 
@@ -125,7 +148,7 @@ def respond():
 #     app.run(debug=True)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 
 
 # todo:
