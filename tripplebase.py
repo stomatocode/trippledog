@@ -90,25 +90,28 @@ app = Flask(__name__)
 # respond to inbound message
 # action="http://tripledog.me/sms_callback"
 def respond():
+    # need to capture inbound message SID here for use in callback
     response = twiml.Response()
-    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://tripledog.me/sms_callback")
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="https://a38ffc8d.ngrok.io/sms_callback")
     # print "responded"
     return str(response)
     # return None
 
 # SMS callback method; retrieve message SID and parameters
-@app.route('/sms_callback')
+# API resource path: /2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}
+@app.route('/sms_callback', methods=['GET', 'POST'])
 
 def test():
     print "################################## NINJA ##################################"
 
-    return str(request.args)
+    object = request.stream
 
+    return str(object)
 
 # def get_message(twilio_response):
-#     # print response
-#     SID = request
-#     message = client.messages.get()
+
+#    message = client.messages.get("MM800f449d0399ed014aae2bcc0cc2f2ec")
+#    print message.body
 #
 #     return None
 
