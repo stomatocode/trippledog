@@ -17,13 +17,14 @@ import os
     # request = Request(environ)
 
 # Your Account Sid and Auth Token from twilio.com/user/account
-ACCOUNT = "AC65041c9af6c305c4dadbb58f1279daf2"
-TOKEN  = "31da0ac861bc350fc86c9accd8f5547e"
-client = TwilioRestClient(ACCOUNT, TOKEN)
 
 # conn = TwilioRestClient()
 
-app = Flask(__name__)
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_object('config')
+app.config.from_pyfile('config.py')
+
+client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
 # global response = ""
 
@@ -104,7 +105,7 @@ def respond():
 def test():
     print "################################## NINJA ##################################"
 
-    object = request.stream
+    object = request.data
 
     return str(object)
 
