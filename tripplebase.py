@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 from flask import Flask
 # import requests
 from flask import request
@@ -21,9 +22,14 @@ import os
 # conn = TwilioRestClient()
 
 app = Flask(__name__, instance_relative_config=True)
-app.config.from_object('config')
-app.config.from_pyfile('config.py')
+# app.config.from_object('yourapplication.default_settings')
+# app.config.from_pyfile('~/instance/config.py')
+# app.config.from_envvar('YOURAPPLICATION_SETTINGS')
 
+
+
+ACCOUNT_SID = ACCOUNT_SID
+AUTH_TOKEN = AUTH_TOKEN
 client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
 # global response = ""
@@ -110,11 +116,11 @@ def test():
     return str(object)
 
 # def get_message(twilio_response):
-
+#
 #    message = client.messages.get("MM800f449d0399ed014aae2bcc0cc2f2ec")
 #    print message.body
 #
-#     return None
+#    return None
 
 
 
