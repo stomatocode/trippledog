@@ -22,14 +22,14 @@ import os
 # conn = TwilioRestClient()
 
 app = Flask(__name__, instance_relative_config=True)
-# app.config.from_object('yourapplication.default_settings')
+app.config.from_object('config')
 # app.config.from_pyfile('~/instance/config.py')
 # app.config.from_envvar('YOURAPPLICATION_SETTINGS')
 
 
 
-ACCOUNT_SID = ACCOUNT_SID
-AUTH_TOKEN = AUTH_TOKEN
+# ACCOUNT_SID = ACCOUNT_SID
+# AUTH_TOKEN = AUTH_TOKEN
 client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
 
 # global response = ""
