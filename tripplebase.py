@@ -10,6 +10,7 @@ from twilio import twiml
 # from werkzeug.wrappers import Request, Response
 
 import os
+# import config_keys
 # print
 # print os.environ.get('KEY_THAT_MIGHT_EXIST')
 
@@ -21,8 +22,8 @@ import os
 
 # conn = TwilioRestClient()
 
-app = Flask(__name__, instance_relative_config=True)
-app.config.from_object('config')
+app = Flask(__name__, instance_path='/instance', instance_relative_config=True)
+app.config.from_object('instance.config_keys')
 # app.config.from_pyfile('~/instance/config.py')
 # app.config.from_envvar('YOURAPPLICATION_SETTINGS')
 
@@ -30,7 +31,7 @@ app.config.from_object('config')
 
 # ACCOUNT_SID = ACCOUNT_SID
 # AUTH_TOKEN = AUTH_TOKEN
-client = TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN)
+client = TwilioRestClient(app.config['ACCOUNT_SID'], app.config['AUTH_TOKEN'])
 
 # global response = ""
 
@@ -100,9 +101,7 @@ def respond():
     # need to capture inbound message SID here for use in callback
     response = twiml.Response()
     message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="https://a38ffc8d.ngrok.io/sms_callback")
-    # print "responded"
     return str(response)
-    # return None
 
 # SMS callback method; retrieve message SID and parameters
 # API resource path: /2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}
