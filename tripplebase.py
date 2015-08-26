@@ -10,36 +10,18 @@ from twilio import twiml
 # from werkzeug.wrappers import Request, Response
 
 import os
-# import config_keys
-# print
-# print os.environ.get('KEY_THAT_MIGHT_EXIST')
-
-
-# def application(environ, start_response):
-    # request = Request(environ)
-
-# Your Account Sid and Auth Token from twilio.com/user/account
-
-# conn = TwilioRestClient()
 
 app = Flask(__name__, instance_path='/instance', instance_relative_config=True)
 app.config.from_object('instance.config_keys')
-# app.config.from_pyfile('~/instance/config.py')
-# app.config.from_envvar('YOURAPPLICATION_SETTINGS')
 
-
-
-# ACCOUNT_SID = ACCOUNT_SID
-# AUTH_TOKEN = AUTH_TOKEN
 client = TwilioRestClient(app.config['ACCOUNT_SID'], app.config['AUTH_TOKEN'])
 
-# global response = ""
 
 
 @app.route('/')
 
-# def greeting():
-#     return 'Hello World!'
+def greeting():
+    return 'Hello World!'
 
 # load most popular dares
 # -> twitter feed panel + internal tracking of votes/dares
@@ -100,7 +82,7 @@ client = TwilioRestClient(app.config['ACCOUNT_SID'], app.config['AUTH_TOKEN'])
 def respond():
     # need to capture inbound message SID here for use in callback
     response = twiml.Response()
-    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="https://a38ffc8d.ngrok.io/sms_callback")
+    message = response.message("Vote received; checkout @tripledogme on Twitter for more action!", sender="+14153199984", action="http://f4cd50b0.ngrok.io/sms_callback")
     return str(response)
 
 # SMS callback method; retrieve message SID and parameters
@@ -110,6 +92,7 @@ def respond():
 def test():
     print "################################## NINJA ##################################"
 
+    # request message SID
     object = request.data
 
     return str(object)
